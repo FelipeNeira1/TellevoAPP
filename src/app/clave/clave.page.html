@@ -1,0 +1,37 @@
+<br>
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title class="ion-padding-top ion-text-center">
+            <on-label>
+                <h4>Recuperar contraseña</h4>
+                <h5>Te llevo App</h5>
+            </on-label>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content color="dark" [fullscreen]="true">
+    <div class="ion-padding-vertical">
+        <ion-card class="ion-text-center">
+            <br>
+            <ion-label class="ion-text-center">
+                <h3>Para recuperar su contraseña porfavor ingrese su usuario.</h3>
+            </ion-label>
+            <br>
+        </ion-card>
+        <br>
+        <ion-card class="ion-text-center">
+            <ion-item>
+                <ion-label color="tertiary" position="floating">Usuario:</ion-label>
+                <ion-input placeholder="Usuario o Correo" type="text" [(ngModel)]="dato" minlength="4" maxlength="12" required> </ion-input>
+            </ion-item>
+        </ion-card>
+        <br>
+        <ion-button shape="block" (click)="alerta()">Recuperar</ion-button>
+        <br>
+        <ion-card class="ion-text-center">
+            <ion-label color="secondary" shape="block" (click)="siguiente()">←Volver al Inicio sesión</ion-label>
+        </ion-card>
+    </div>
+</ion-content>
