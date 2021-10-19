@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title class="ion-padding-top ion-text-center">
+            <ion-label>
+                <img src="assets/img/2.png">
+                <h1>Te llevo APP</h1>
+                <h5>Un amigo en DuocUC</h5>
+            </ion-label>
+            <br>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark" [fullscreen]="true" class="background">
+    <div class="ion-padding-vertical">
+        <ion-card class="ion-text-center">
+            <ion-card-title class="ion-text-center">
+                <ion-label><img src="assets/img/1.png">
+                    <h2>!Bienvenid@¡</h2>
+                </ion-label>
+            </ion-card-title>
+        </ion-card>
+
+        <br>
+
+        <ion-cart-content>
+            <ion-card class="ion-text-center">
+
+                <ion-item>
+                    <ion-label color="tertiary" position="floating">Usuario:</ion-label>
+                    <ion-input placeholder="Usuario o Correo" type="text" [(ngModel)]="dato" minlength="4" maxlength="12" required> </ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label color="tertiary" position="floating">Password:</ion-label>
+                    <ion-input placeholder="********" type="password" [(ngModel)]="contra" maxlength="20" minlength="8" required></ion-input>
+                </ion-item>
+
+            </ion-card>
+            <br>
+        </ion-cart-content>
+        <ion-button shape="block" (click)="siguiente()">Ingresar</ion-button>
+
+        <br>
+
+        <ion-card class="ion-text-center">
+            <ion-label color="secondary" shape="block" (click)="siguiente2()">¿Olvidaste tu contraseña? Recuperala aquí</ion-label>
+            <br>
+            <ion-label shape="block" (click)="(no)">Crear usuario</ion-label>
+        </ion-card>
+    </div>
+</ion-content>
