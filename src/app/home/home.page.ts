@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup,Validators } from '@angular/forms';
+import { Router,NavigationExtras } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
@@ -9,36 +9,42 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  dato: string;
-  //validar
-  public user ={
-  gmail:'',
-  password:''
+  HomeForm: FormGroup;
+  newUser={
+    newUsuario:"",
+    newPass:""
   };
+
+  get user() {
+    return this.HomeForm.get('user');
+  }
+
+  get password() {
+    return this.HomeForm.get('password');
+  }
+
   //----
-  public fGroup: FormGroup;
-  //----
-  constructor(public toastController: ToastController,alertController: AlertController,private router: Router,fbuilder: FormBuilder) {}
+  constructor(private form: FormBuilder ,private router: Router) {}
     //onint
-  ngOnInit(){}
-    //onint
-  siguiente(){
-    //dg
-    this.presentToast('<ion-label><img src="assets/img/1.png"></ion-label> <br>!Bienvenid@¡ '+this.dato);
-    this.router.navigate(['/principal']);
+  ngOnInit(){
+    this.HomeForm = this.form.group({
+      user: ['',[Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(3)]]
+    })
+  }
+  public ingresar() {
+    console.log(this.HomeForm.value);
+
+    let navigationExtras: NavigationExtras = {
+      state: {
+        newUser: this.newUser
+      }
+    };
+    this.router.navigate(['/principal'], navigationExtras);
   }
   siguiente2(){
     //dg
     this.router.navigate(['/clave']);
   }
-  async presentToast(msg: string){
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 2000
-    });
-    toast.present();
-  }
-  submitForm(){
-    console.log('Sudmit!');
-  }
+
 }
