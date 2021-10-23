@@ -12,10 +12,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
-  },
-  {
     path: 'clave',
     loadChildren: () => import('./clave/clave.module').then( m => m.ClavePageModule)
   },
