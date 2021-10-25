@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { Router } from '@angular/router';
 import { AlertController, AnimationController, Animation, ModalController } from '@ionic/angular';
 import * as Bounce from 'bounce.js';
-import { BdLocaLService } from '../services/bd-loca-l.service';
+import { BdLocaLService } from '../../services/bd-loca-l.service';
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',

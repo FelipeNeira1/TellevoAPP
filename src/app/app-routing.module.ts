@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
   {
     path: '',
@@ -13,14 +13,15 @@ const routes: Routes = [
   },
   {
     path: 'clave',
-    loadChildren: () => import('./clave/clave.module').then( m => m.ClavePageModule)
+    loadChildren: () => import('./pages/clave/clave.module').then( m => m.ClavePageModule)
   },
   {
     path: 'principal',
-    loadChildren: () => import('./principal/principal.module').then( m => m.PrincipalPageModule)
-  },  {
+    loadChildren: () => import('./pages/principal/principal.module').then( m => m.PrincipalPageModule)
+  },
+  {
     path: 'eleguir',
-    loadChildren: () => import('./eleguir/eleguir.module').then( m => m.EleguirPageModule)
+    loadChildren: () => import('./pages/eleguir/eleguir.module').then( m => m.EleguirPageModule)
   },
 
 ];
