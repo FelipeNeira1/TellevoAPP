@@ -1,0 +1,24 @@
+<ion-content color="dark" mode="ios">
+    <ion-card>
+        <ion-card-header class="ion-text-center">
+            <div #bienvenida>
+                <ion-card-title>Bienvenid@!</ion-card-title>
+            </div>
+            <h1>{{data.newUsuario}}</h1>
+        </ion-card-header>
+    </ion-card>
+    <ion-card>
+        <ion-card-content class="ion-text-center">
+            <div style="height: 120px;">
+                <img src="assets/img/duocau.jpg" alt="Logo TeLlevoApp">
+            </div>
+            <br>
+            <ion-card-title>Selecione un servicio</ion-card-title>
+            <ion-button color="secondary" [routerLink]="['/']">Trasportar personas</ion-button>
+            <ion-button color="secondary" [routerLink]="['/principal']">Trasporte para mi</ion-button>
+        </ion-card-content>
+    </ion-card>
+    <ion-toolbar color="dark">
+        <ion-button shape="round" fill="outline" slot="" size="small" color="danger" shape="block" (click)="cerrar()">cerrar sesión</ion-button>
+    </ion-toolbar>
+</ion-content>

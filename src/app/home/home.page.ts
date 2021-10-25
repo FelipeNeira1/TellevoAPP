@@ -12,7 +12,6 @@ export class HomePage implements OnInit {
   HomeForm: FormGroup;
   newUser={
     newUsuario:"",
-    newPass:""
   };
 
   get user() {
@@ -40,7 +39,7 @@ export class HomePage implements OnInit {
         newUser: this.newUser
       }
     };
-    this.router.navigate(['/principal'], navigationExtras);
+    this.router.navigate(['/eleguir'], navigationExtras);
   }
   siguiente2(){
     //dg

@@ -2,19 +2,25 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { Router } from '@angular/router';
 import { AlertController, AnimationController, Animation, ModalController } from '@ionic/angular';
 import * as Bounce from 'bounce.js';
+import { BdLocaLService } from '../services/bd-loca-l.service';
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
   styleUrls: ['./principal.page.scss'],
 })
 export class PrincipalPage implements AfterViewInit,OnInit {
+  nombre: string;
+  nro: string;
   anim: Animation;
   ///
   //@ViewChild('square', { static:false }) square: ElementRef;
   //isPlaying = false;
-  constructor(private router: Router, public alertController: AlertController,public modalController: ModalController,
+  constructor(private bdLocal: BdLocaLService,private router: Router, public alertController: AlertController,public modalController: ModalController,
     public animationCtrl: AnimationController) {}
   ///
+  guardar(){
+    this.bdLocal.guardarContactos(this.nombre,this.nro);
+  }
 ngAfterViewInit(){
   this.anim = this.animationCtrl.create('myanim');
   this.anim
