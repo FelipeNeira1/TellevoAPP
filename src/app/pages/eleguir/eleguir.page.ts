@@ -9,17 +9,25 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./eleguir.page.scss'],
 })
 export class EleguirPage implements AfterViewInit {
-  data:any;
+  data: any;
 
   constructor(private activeroute: ActivatedRoute, private router: Router, public alertController: AlertController) {
+    this.router.navigate(['eleguir/uno']);
+
     this.activeroute.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.newUser;
-        console.log(this.data)
-      }else{this.router.navigate(["/home"])}
+        console.log(this.data);
+      } else {this.router.navigate([''])}
     });
   }
 
+segmentChanged($event){
+  console.log($event);
+  let direccion= $event.detail.value;
+  this.router.navigate(['eleguir/'+direccion]);
+
+}
   ngAfterViewInit(){
   }
   cerrar(){

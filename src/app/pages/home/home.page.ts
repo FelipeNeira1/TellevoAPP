@@ -9,9 +9,10 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   HomeForm: FormGroup;
   newUser={
-    newUsuario:"",
+  newUsuario:"",
   };
 
   get user() {
@@ -29,7 +30,7 @@ export class HomePage implements OnInit {
     this.HomeForm = this.form.group({
       user: ['',[Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(3)]]
-    })
+    });
   }
   public ingresar() {
     console.log(this.HomeForm.value);

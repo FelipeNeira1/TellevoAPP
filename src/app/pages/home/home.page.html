@@ -34,7 +34,7 @@
                         <small class="mensaje-error" *ngIf="HomeForm.get('password').errors.minlength">La contraseña debe tener al menos 3 caracteres</small>
                     </ng-container>
                     <div>
-                        <ion-button color="secondary" [disabled]="!HomeForm.valid" type="submit" mode="md" expand="block">Ingresar</ion-button>
+                        <ion-button color="secondary" [disabled]="!HomeForm.valid" type="submit" mode="md" expand="block" (click)="ingresar()">Ingresar</ion-button>
                     </div>
                 </form>
             </ion-card-content>

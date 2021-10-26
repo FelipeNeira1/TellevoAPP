@@ -16,7 +16,7 @@ export class ClavePage implements OnInit {
   }
   siguiente(){
     //dg
-    this.router.navigate(['/home']);
+    this.router.navigate(['/principal']);
   }
   siguiente2(){
     //dg
