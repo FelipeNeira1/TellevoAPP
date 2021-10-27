@@ -31,4 +31,29 @@ export class APIClientService {
         retry(3)
       );
     }
+    getPosts(userId): Observable<any>{
+      return this.http.get(this.apiURL+'/post/').pipe(
+        retry(3)
+      );
+    }
+    getPost(userId): Observable<any>{
+      return this.http.get(this.apiURL+'/post/', id, this.httpOptions).pipe(
+        retry(3)
+      );
+    }
+    createPost(userId): Observable<any>{
+      return this.http.get(this.apiURL+'/post/'+ post, this.httpOptions).pipe(
+        retry(3)
+      );
+    }
+    updatePost(userId): Observable<any>{
+      return this.http.get(this.apiURL+'/post/'+ id,post, this.httpOptions).pipe(
+        retry(3)
+      );
+    }
+    deletePost(userId): Observable<any>{
+      return this.http.get(this.apiURL+'/post/'+ id, this.httpOptions).pipe(
+        retry(3)
+      );
+    }
 }

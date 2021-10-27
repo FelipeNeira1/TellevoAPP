@@ -18,7 +18,7 @@ export class EleguirPage implements AfterViewInit {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.newUser;
         console.log(this.data);
-      } else {this.router.navigate([''])}
+      } else {this.router.navigate(['/eleguir'])}
     });
   }
 

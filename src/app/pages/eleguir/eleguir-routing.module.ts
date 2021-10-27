@@ -12,11 +12,11 @@ const routes: Routes = [
     component: EleguirPage,
       children:[
         {
-          path:'uno',
+          path:'dos',
           component:CompPedirComponent
         },
         {
-          path:'dos',
+          path:'uno',
           component:CompViajeComponent
         },
         {
