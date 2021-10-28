@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, AnimationController, Animation, ModalController } from '@ionic/angular';
-import * as Bounce from 'bounce.js';
+
 import { BdLocaLService } from '../../services/bd-loca-l.service';
 @Component({
   selector: 'app-principal',
@@ -15,7 +15,8 @@ export class PrincipalPage implements AfterViewInit,OnInit {
   ///
   //@ViewChild('square', { static:false }) square: ElementRef;
   //isPlaying = false;
-  constructor(private bdLocal: BdLocaLService,private router: Router, public alertController: AlertController,public modalController: ModalController,
+  constructor(private bdLocal: BdLocaLService,private router: Router,
+    public alertController: AlertController,public modalController: ModalController,
     public animationCtrl: AnimationController) {}
   ///
   guardar(){
@@ -83,33 +84,7 @@ ngAfterViewInit(){
     const { role } = await alert.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
   }
-  @ViewChild('bouncebtn', { read: ElementRef })bouncebtn: ElementRef;
-bounce() {
-  var bounce = new Bounce();
-  bounce
-  .translate({
-    from: { x: -300, y: 0 },
-    to: { x: 0, y: 0 },
-    duration: 600,
-    stiffness: 4
-  })
-  .scale({
-    from: { x: 1, y: 1 },
-    to: { x: 0.1, y: 2.3 },
-    easing: 'sway',
-    duration: 800,
-    delay: 65,
-    stiffness: 2
-  })
-  .scale({
-    from: { x: 1, y: 1 },
-    to: { x: 5, y: 1 },
-    easing: 'sway',
-    duration: 300,
-    delay: 30,
-  })
-    .applyTo(this.bouncebtn.nativeElement);
-}
+
 
 }
 

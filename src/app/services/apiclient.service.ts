@@ -56,4 +56,8 @@ export class APIClientService {
         retry(3)
       );
     }
+    borrarViaje(id: number){
+      return this.http.get(this.apiURL+'/viajes/?id='+id)
+      return this.http.delete(path);
+    }
 }

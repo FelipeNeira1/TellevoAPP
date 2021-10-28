@@ -84,6 +84,7 @@ ngAfterViewInit(){
     const { role } = await alert.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
   }
+  //animacion
   @ViewChild('bouncebtn', { read: ElementRef })bouncebtn: ElementRef;
 bounce() {
   var bounce = new Bounce();

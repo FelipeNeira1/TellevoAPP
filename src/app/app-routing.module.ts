@@ -12,16 +12,16 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'clave',
-    loadChildren: () => import('./pages/clave/clave.module').then( m => m.ClavePageModule)
-  },
-  {
     path: 'principal',
     loadChildren: () => import('./pages/principal/principal.module').then( m => m.PrincipalPageModule)
   },
   {
     path: 'eleguir',
     loadChildren: () => import('./pages/eleguir/eleguir.module').then( m => m.EleguirPageModule)
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   },
 
 ];

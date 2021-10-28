@@ -1,0 +1,26 @@
+<ion-content color="dark" [fullscreen]="true" class="background">
+    <div class="ion-padding-vertical">
+        <ion-card class="ion-text-center">
+            <ion-card-title class="ion-text-center">
+                <ion-label>
+                    <br>
+                    <h1><b>Te llevo APP</b></h1>
+                    <ion-toolbar color>
+                        <img height="150px" width="300px" src="assets/img/duocau.jpg">
+                    </ion-toolbar>
+                    <h5>Un amigo en DuocUC</h5>
+                </ion-label>
+            </ion-card-title>
+        </ion-card>
+        <ion-card>
+            <ion-toolbar class="ion-text-center">
+                <h1><b>crear tu cuenta</b></h1>
+            </ion-toolbar>
+        </ion-card>
+        <ion-card>
+            <ion-input type="text" placeholder="ingrese nombre" [(ngModel)]="nombre"></ion-input>
+            <ion-input type="text" placeholder="ingrese n°" [(ngModel)]="nro"></ion-input>
+            <ion-buttom shape="block" (click)="guardar()">guardar</ion-buttom>
+        </ion-card>
+    </div>
+</ion-content>

@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+/* eslint-disable @typescript-eslint/naming-convention */
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { Router,NavigationExtras } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
-
+import { AlertController, AnimationController,Animation, ToastController } from '@ionic/angular';
+import { BdLocaLService } from '../../services/bd-loca-l.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
+//
   HomeForm: FormGroup;
   newUser={
-  newUsuario:"",
+  newUsuario:'',
   };
 
   get user() {
@@ -24,8 +25,9 @@ export class HomePage implements OnInit {
   }
 
   //----
-  constructor(private form: FormBuilder ,private router: Router,public alertController: AlertController, public toast: ToastController) {}
-    //onint
+  constructor(private form: FormBuilder ,private router: Router,public alertController: AlertController,
+    public toast: ToastController,public animationCtrl: AnimationController,private bdLocal: BdLocaLService) {}
+    ///stor
   ngOnInit(){
     this.HomeForm = this.form.group({
       user: ['',[Validators.required, Validators.minLength(3)]],
@@ -35,14 +37,14 @@ export class HomePage implements OnInit {
   public ingresar() {
     console.log(this.HomeForm.value);
 
-    let navigationExtras: NavigationExtras = {
+    const navigationExtras: NavigationExtras = {
       state: {
         newUser: this.newUser
       }
     };
     this.router.navigate(['/eleguir'], navigationExtras);
   }
-  //contra
+  //contraseña
   async mostrarToast() {
     await this.toast.create({
       message: 'Un correo se te fue enviado para recuperar la contraseña o cambiarla ',
@@ -73,7 +75,6 @@ export class HomePage implements OnInit {
             } else {
               if (!alert.getElementsByClassName('mensaje-error').length) {
                 const input = alert.getElementsByTagName('input')[0];
-    
                 const validationErrors = document.createElement('div');
                 validationErrors.className = 'mensaje-error';
                 const errorMessage = document.createElement('small');
@@ -104,7 +105,10 @@ export class HomePage implements OnInit {
         return {
           isValid: false,
           message: 'El nombre de usuario no es válido.'
-        }
+        };
     }
-}
+  }
+  cerrar1(){
+    this.router.navigate(['/registro']);
+  }
 }
