@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+import {GuardsGuard} from 'src/app/guards/guards.guard';
 const routes: Routes = [
   {
     path: 'home',
@@ -13,14 +13,17 @@ const routes: Routes = [
   },
   {
     path: 'principal',
+    canActivate:[GuardsGuard],
     loadChildren: () => import('./pages/principal/principal.module').then( m => m.PrincipalPageModule)
   },
   {
     path: 'eleguir',
+    canActivate:[GuardsGuard],
     loadChildren: () => import('./pages/eleguir/eleguir.module').then( m => m.EleguirPageModule)
   },
   {
     path: 'registro',
+    canActivate:[GuardsGuard],
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   },
 

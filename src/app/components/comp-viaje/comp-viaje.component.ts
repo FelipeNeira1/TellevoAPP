@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, AnimationController, Animation, ModalController } from '@ionic/angular';
+import { AlertController, AnimationController, Animation, ModalController, ToastController } from '@ionic/angular';
 import * as Bounce from 'bounce.js';
+import { APIClientService } from 'src/app/services/apiclient.service';
 import { BdLocaLService } from '../../services/bd-loca-l.service';
 
 @Component({
@@ -11,17 +12,47 @@ import { BdLocaLService } from '../../services/bd-loca-l.service';
 })
 export class CompViajeComponent implements AfterViewInit,OnInit {
   nombre: string;
-  nro: string;
+  contra: string;
   anim: Animation;
+  //
+  viajes: any;
+  viaje: any={
+    id: null,
+    inicio:'',
+    destino: '',
+    tarifa: '',
+    userId: null
+  };
   ///
   //@ViewChild('square', { static:false }) square: ElementRef;
   //isPlaying = false;
-  constructor(private bdLocal: BdLocaLService,private router: Router, public alertController: AlertController,public modalController: ModalController,
-    public animationCtrl: AnimationController) {}
-  ///
-  guardar(){
-    this.bdLocal.guardarContactos(this.nombre,this.nro);
+  constructor(private bdLocal: BdLocaLService,private router: Router,
+    public alertController: AlertController,public modalController: ModalController,
+    public animationCtrl: AnimationController,private api: APIClientService,
+    private toastController: ToastController) {}
+
+    guardarViajes(){
+      this.api.createViajes(this.viaje).subscribe(
+      ()=>{
+        console.log('viaje creado');
+        this.toastExito();
+      },
+      error=>{
+        console.log('error:'+error);
+        this.toastError();
+      }
+      );
+    }
+  toastError() {
+    throw new Error('Method not implemented.');
   }
+  toastExito() {
+  }
+    ///guardar
+
+  //guardar(){
+   // this.bdLocal.guardarContactos(this.nombre,this.contra);
+ // }
 ngAfterViewInit(){
   this.anim = this.animationCtrl.create('myanim');
   this.anim
@@ -87,7 +118,7 @@ ngAfterViewInit(){
   //animacion
   @ViewChild('bouncebtn', { read: ElementRef })bouncebtn: ElementRef;
 bounce() {
-  var bounce = new Bounce();
+  const bounce = new Bounce();
   bounce
   .translate({
     from: { x: -300, y: 0 },

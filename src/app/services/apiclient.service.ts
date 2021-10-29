@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-
+import { Storage } from '@ionic/storage';
 import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { retry, catchError} from 'rxjs/operators';
 import { Observable} from 'rxjs';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -16,48 +17,23 @@ export class APIClientService {
   };
 
   // Se establece la base url del API a consumir
-    apiURL = 'https://jsonplaceholder.typicode.com';
+    apiURL = 'http://192.168.1.5:3000/';
 
     // Se declara la variable http de tipo HttpClient
-    constructor(private http: HttpClient) { }
+    constructor(private storage: Storage ,private http: HttpClient,private toastController: ToastController) {
+    }
+    // eslint-disable-next-line @typescript-eslint/naming-convention
 
-    getUsuarios(): Observable<any>{
-      return this.http.get(this.apiURL+'/user/').pipe(
+    createViajes(post): Observable<any> {
+      return this.http.get(this.apiURL+'/post/',post+this.httpOptions).pipe(
         retry(3)
-      );
-    }
-    getUsuario(userId): Observable<any>{
-      return this.http.get(this.apiURL+'/user/'+userId).pipe(
+      );}
+    getViajes(): Observable<any> {
+      return this.http.get(this.apiURL+'/viajes/').pipe(
         retry(3)
-      );
-    }
-    getPosts(userId): Observable<any>{
-      return this.http.get(this.apiURL+'/post/').pipe(
+      );}
+    deleteViajes(id): Observable<any> {
+      return this.http.delete(this.apiURL+'/viajes/'+ id,this.httpOptions).pipe(
         retry(3)
-      );
-    }
-    getPost(userId): Observable<any>{
-      return this.http.get(this.apiURL+'/post/', id, this.httpOptions).pipe(
-        retry(3)
-      );
-    }
-    createPost(userId): Observable<any>{
-      return this.http.get(this.apiURL+'/post/'+ post, this.httpOptions).pipe(
-        retry(3)
-      );
-    }
-    updatePost(userId): Observable<any>{
-      return this.http.get(this.apiURL+'/post/'+ id,post, this.httpOptions).pipe(
-        retry(3)
-      );
-    }
-    deletePost(userId): Observable<any>{
-      return this.http.get(this.apiURL+'/post/'+ id, this.httpOptions).pipe(
-        retry(3)
-      );
-    }
-    borrarViaje(id: number){
-      return this.http.get(this.apiURL+'/viajes/?id='+id)
-      return this.http.delete(path);
-    }
+      );}
 }

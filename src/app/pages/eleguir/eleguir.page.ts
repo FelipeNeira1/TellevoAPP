@@ -18,13 +18,13 @@ export class EleguirPage implements AfterViewInit {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.newUser;
         console.log(this.data);
-      } else {this.router.navigate(['/eleguir'])}
+      } else {this.router.navigate(['/eleguir']);}
     });
   }
 
 segmentChanged($event){
   console.log($event);
-  let direccion= $event.detail.value;
+  const direccion= $event.detail.value;
   this.router.navigate(['eleguir/'+direccion]);
 
 }
