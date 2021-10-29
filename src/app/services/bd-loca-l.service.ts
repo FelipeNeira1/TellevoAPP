@@ -24,15 +24,15 @@ export class BdLocaLService {
     this._storage =storage;
   }
 
-  guardarUsuarios(Nombre: string ,contra: string){
-const existe=this.agenda.find(C=>C.strNumero === contra);
+  guardarUsuarios(Nombre: string ,nro: string){
+const existe=this.agenda.find(C=>C.strNumero === nro);
     if (!existe){
-      this.agenda.unshift({strNombre: Nombre,strNumero:contra});
+      this.agenda.unshift({strNombre: Nombre,strNumero:nro});
       this._storage.set('agenda',this.agenda);
       // eslint-disable-next-line no-underscore-dangle
       this.presentToast('usuario guardado con exito');
     }else {
-      this.presentToast('usuario  sin exito');
+      this.presentToast('usuario  no se pudo registrar ');
     };
   }
   async cargarUsuarios() {

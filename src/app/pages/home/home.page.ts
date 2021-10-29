@@ -16,7 +16,7 @@ newUser={
 newUsuario:'',
 };
 dato: string;
-
+nro: string;
 nombre: string;
 contra: string;
 anim: Animation;
