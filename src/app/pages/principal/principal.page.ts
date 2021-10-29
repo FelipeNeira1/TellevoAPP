@@ -16,9 +16,7 @@ export class PrincipalPage implements AfterViewInit,OnInit {
   constructor(private form: FormBuilder ,private router: Router,public alertController: AlertController,
     public toast: ToastController,public animationCtrl: AnimationController,private bdLocal: BdLocaLService) {}
     ///stor
-  guardar(){
-    this.bdLocal.guardarUsuarios(this.usuario,this.contraseña);
-  }
+
 ngAfterViewInit(){
   this.anim = this.animationCtrl.create('myanim');
   this.anim

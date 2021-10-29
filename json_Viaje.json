@@ -1,0 +1,8 @@
+﻿{
+    "viaje": [{
+        "viajeId": "1",
+        "inicio ": "aqui",
+        "destino ": "un lado",
+        "tarifa": "1000"
+    }]
+}

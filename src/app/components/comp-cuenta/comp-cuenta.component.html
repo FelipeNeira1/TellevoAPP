@@ -1,3 +1,13 @@
-<ion-toolbar color="dark">
-    <ion-button shape="round" fill="outline" slot="" size="small" color="danger" shape="block" (click)="cerrar()">cerrar sesión</ion-button>
-</ion-toolbar>
+<ion-header>
+    <ion-card>
+        <ion-card-header class="ion-text-center">
+            <div>
+                <ion-card-title>Bienvenid@!</ion-card-title>
+            </div>
+            <h1>(usuario)</h1>
+        </ion-card-header>
+    </ion-card>
+    <div class="ion-text-center">
+        <ion-button color="secondary" type="submit" mode="md" expand="block" (click)="cerrar()">Cerrar sesión</ion-button>
+    </div>
+</ion-header>

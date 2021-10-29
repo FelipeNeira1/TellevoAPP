@@ -43,6 +43,7 @@ export class CompViajeComponent implements AfterViewInit,OnInit {
       }
       );
     }
+
   toastError() {
     throw new Error('Method not implemented.');
   }
@@ -143,5 +144,4 @@ bounce() {
   })
     .applyTo(this.bouncebtn.nativeElement);
 }
-
 }

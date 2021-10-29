@@ -14,7 +14,8 @@ export class RegistroPage implements AfterViewInit,OnInit {
   usuario: string;
   contraseña: string;
   anim: Animation;
-  constructor(private form: FormBuilder ,private router: Router,public alertController: AlertController,
+
+  constructor(private router: Router,public alertController: AlertController,
     public toast: ToastController,public animationCtrl: AnimationController,private bdLocal: BdLocaLService) {}
     ///stor
   guardar(){

@@ -9,15 +9,22 @@ import { BdLocaLService } from '../../services/bd-loca-l.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit,AfterViewInit {
 //
-  HomeForm: FormGroup;
-  newUser={
-  newUsuario:'',
-  };
+HomeForm: FormGroup;
+newUser={
+newUsuario:'',
+};
+dato: string;
+
+nombre: string;
+contra: string;
+anim: Animation;
+auth: any;
+usus: any;
   usuario: any;
-  auth: any;
-  usus: any;
+  data: any;
+
 
   get user() {
     return this.HomeForm.get('user');
@@ -35,15 +42,29 @@ export class HomePage implements OnInit {
       this.router.navigate(['eleguir/uno']);
       this.activeroute.queryParams.subscribe(params => {
         if (this.router.getCurrentNavigation().extras.state) {
-          this.usuario = this.router.getCurrentNavigation().extras.state.newUser;
-          console.log(this.usuario);
-        } else {this.router.navigate(['/eleguir']);}
+          this.nombre = this.router.getCurrentNavigation().extras.state.newUser;
+          console.log(this.nombre);
+        } else {this.router.navigate(['/home']);}
       });
+    }
+    guardar(){
+      this.bdLocal.guardarUsuarios(this.nombre,this.contra);
     }
 ionViewWillEnter(){
   this.bdLocal.cargarUsuarios();
 }
-    ///stor
+ngAfterViewInit(){
+  this.anim = this.animationCtrl.create('myanim');
+  this.anim
+  .duration(1500)
+  .easing('ease-out')
+  .iterations(Infinity)
+  .fromTo('trasfrom','traslateX(0px)','traslateX(300px)')
+  .fromTo('opacity',1,0.2);
+}//
+
+    ///
+
   ngOnInit(){
     this.HomeForm = this.form.group({
       user: ['',[Validators.required, Validators.minLength(3)]],
@@ -60,44 +81,7 @@ ionViewWillEnter(){
     };
     this.router.navigate(['/eleguir'], navigationExtras);
   }
-  //
-  lohome(){
-  const i = this.usus.findindex(e => e.usuario === this.usuario);
-  if(i >= 0) {
-    if (this.usuario === this.usus[i].usuario && this.password === this.usus[i].contraseña){
-      console.log('El usuario y contraseha existe');
-      this.auth.logueado = true;
-      this.anination();
-    }else {
-      console.log('no existen');
-      this.auth.logueado = false;
-      this.presentToast('Usuario y/o Contraseña Inválidos');
-    }
-  }else{
-    console.log('no existen ');
-    this.auth.logueada = false;
-    this.presentToast('Usuario y/o Contraseña Inválidos');
-  }
-  setTimeout (()=>{
-  const navigationExtras: NavigationExtras = {
-    state: {usuario: this.usuario }
-  };
-    this.router.navigate(['/eleguir'], navigationExtras);
-  }, 1000);
-}
-  anination() {
-    throw new Error('Method not implemented.');
-  }
-  async presentToast(mensaje: string){
-    const toast = await this.toastController.create({
-      message: mensaje,
-      translucent:true,
-      color:'medium',
-      position: 'top',
-      duration: 4000
-    });
-    toast.present();
-  }
+
   validarUsuario(user: string) {
     if(user.length >=4){
       return {
@@ -162,7 +146,7 @@ ionViewWillEnter(){
     });
     await alert.present();
   }
-  //contraseña
+  //contraseña2
   async mostrarToast2() {
     await this.toastController.create({
       message: 'la cuenta fue creada',
@@ -194,7 +178,7 @@ ionViewWillEnter(){
           role: 'submit',
           handler: (formData: { user: string }) => {
             if (formData.user && this.validarUsuario(formData.user).isValid) {
-              this.mostrarToast();
+              this.mostrarToast2();
               return formData;
             } else {
               if (!alert.getElementsByClassName('mensaje-error').length) {
@@ -220,6 +204,48 @@ ionViewWillEnter(){
     await alert.present();
   }
   cerrar1(){
-    this.router.navigate(['/principal']);
+    this.router.navigate(['/registro']);
+  }
+  segmentChanged($event){
+    let direccion=$event.detail.value;
+    this.router.navigate(['home/'+direccion]);
+  }
+//
+lohome(){
+  const i = this.usus.findindex(e => e.usuario === this.usuario);
+  if(i >= 0) {
+    if (this.usuario === this.usus[i].usuario && this.password === this.usus[i].contraseña){
+      console.log('El usuario y contraseha existe');
+      this.auth.logueado = true;
+      this.anination();
+    }else {
+      console.log('no existen');
+      this.auth.logueado = false;
+      this.presentToast('Usuario y/o Contraseña Inválidos');
+    }
+  }else{
+    console.log('no existen ');
+    this.auth.logueada = false;
+    this.presentToast('Usuario y/o Contraseña Inválidos');
+  }
+  setTimeout (()=>{
+  const navigationExtras: NavigationExtras = {
+    state: {usuario: this.usuario }
+  };
+    this.router.navigate(['/eleguir'], navigationExtras);
+  }, 1000);
+}
+  anination() {
+    throw new Error('Method not implemented.');
+  }
+  async presentToast(mensaje: string){
+    const toast = await this.toastController.create({
+      message: mensaje,
+      translucent:true,
+      color:'medium',
+      position: 'top',
+      duration: 4000
+    });
+    toast.present();
   }
 }

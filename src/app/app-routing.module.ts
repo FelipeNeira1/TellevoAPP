@@ -13,18 +13,22 @@ const routes: Routes = [
   },
   {
     path: 'principal',
-    canActivate:[GuardsGuard],
+    //canActivate:[GuardsGuard],
     loadChildren: () => import('./pages/principal/principal.module').then( m => m.PrincipalPageModule)
   },
   {
     path: 'eleguir',
-    canActivate:[GuardsGuard],
+    //canActivate:[GuardsGuard],
     loadChildren: () => import('./pages/eleguir/eleguir.module').then( m => m.EleguirPageModule)
   },
   {
     path: 'registro',
-    canActivate:[GuardsGuard],
+    //canActivate:[GuardsGuard],
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
 
 ];

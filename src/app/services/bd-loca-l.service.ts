@@ -2,13 +2,13 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
-import { Usuario } from '../interfaces/Usuario';
+import { IAgenda } from '../interfaces/iagenda';
 @Injectable({
   providedIn: 'root'
 })
 export class BdLocaLService {
 
-  usuarios: Usuario[]=[];
+  agenda: IAgenda[]=[];
 
   private _storage: Storage | null = null;
   // eslint-disable-next-line @typescript-eslint/member-ordering
@@ -24,21 +24,24 @@ export class BdLocaLService {
     this._storage =storage;
   }
 
-  guardarUsuarios(usuario: string ,contraseña: string){
-
-      this.usuarios.unshift({usuario: usuario,contraseña:contraseña});
+  guardarUsuarios(Nombre: string ,contra: string){
+const existe=this.agenda.find(C=>C.strNumero === contra);
+    if (!existe){
+      this.agenda.unshift({strNombre: Nombre,strNumero:contra});
+      this._storage.set('agenda',this.agenda);
       // eslint-disable-next-line no-underscore-dangle
-      this._storage.set('usuario',this.usuarios);
-      this.presentToast('contacto guardado con exito');
-    }
-
-    async cargarUsuarios() {
-      const registro= await this.storage.get('usuarios');
-      if  (registro){
-        this.usuarios = registro;
-      }console.log(this.usuarios);
-    }
-    async presentToast(mensaje: string){
+      this.presentToast('usuario guardado con exito');
+    }else {
+      this.presentToast('usuario  sin exito');
+    };
+  }
+  async cargarUsuarios() {
+    const miIAgenda= await this.storage.get('IAgenda');
+    if  (miIAgenda){
+      this.agenda = miIAgenda;
+    }console.log(this.agenda);
+  }
+  async presentToast(mensaje: string){
       const toast = await this.toastController.create({
         message: mensaje,
         translucent:true,
@@ -48,4 +51,4 @@ export class BdLocaLService {
       });
       toast.present();
     }
-  }
+}
