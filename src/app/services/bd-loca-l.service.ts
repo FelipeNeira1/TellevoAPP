@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
@@ -15,7 +16,7 @@ export class BdLocaLService {
   registrado: boolean;
   constructor(private storage: Storage, public toastController: ToastController) {
     this.init();
-    this.cargarUsuarios();
+    this.cargarContectos();
   }
 
   async init(){
@@ -23,24 +24,24 @@ export class BdLocaLService {
     // eslint-disable-next-line no-underscore-dangle
     this._storage =storage;
   }
-
-  guardarUsuarios(Nombre: string ,nro: string){
-const existe=this.agenda.find(C=>C.strNumero === nro);
+  async cargarContectos() {
+    const miAgenda= await this.storage.get('agenda');
+    if (miAgenda){
+      this.agenda=miAgenda;
+    }
+  }
+  guardarContactos(Nombre: string,password: string,correo: string){
+    const existe= this.agenda.find(c=>c.strNombre===Nombre);
     if (!existe){
-      this.agenda.unshift({strNombre: Nombre,strNumero:nro});
+      this.agenda.unshift({strNombre:Nombre, strPassword:password, strCorreo:correo});
       this._storage.set('agenda',this.agenda);
-      // eslint-disable-next-line no-underscore-dangle
-      this.presentToast('usuario guardado con exito');
-    }else {
-      this.presentToast('usuario  no se pudo registrar ');
-    };
+      this.presentToast('Su Usuario se ha registrado correctamente');
+
+    }else{
+      this.presentToast('Error: El usuario ya existe');
+    }
   }
-  async cargarUsuarios() {
-    const miIAgenda= await this.storage.get('IAgenda');
-    if  (miIAgenda){
-      this.agenda = miIAgenda;
-    }console.log(this.agenda);
-  }
+
   async presentToast(mensaje: string){
       const toast = await this.toastController.create({
         message: mensaje,

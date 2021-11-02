@@ -10,17 +10,23 @@ import { BdLocaLService } from '../../services/bd-loca-l.service';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage implements AfterViewInit,OnInit {
-  dato: string;
-  usuario: string;
-  contraseña: string;
+
+
+  Nombre: string;
+  password: string;
+  correo: string;
   anim: Animation;
 
   constructor(private router: Router,public alertController: AlertController,
     public toast: ToastController,public animationCtrl: AnimationController,private bdLocal: BdLocaLService) {}
     ///stor
-  guardar(){
-    this.bdLocal.guardarUsuarios(this.usuario,this.contraseña);
-  }
+    guardar(){
+      this.bdLocal.guardarContactos(this.Nombre,this.password,this.correo);
+    }
+ionViewWillEnter(){
+  this.bdLocal.cargarContectos();
+}
+
 ngAfterViewInit(){
   this.anim = this.animationCtrl.create('myanim');
   this.anim
@@ -33,7 +39,6 @@ ngAfterViewInit(){
   ngOnInit() {
   }
   cerrar(){
-    //dg
     this.router.navigate(['/home']);
   }
 }

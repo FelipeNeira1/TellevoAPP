@@ -1,4 +1,5 @@
-export interface Usuarios {
-    usuario: string;
-    contraseña: string;
+export interface IAgenda {
+    strPassword: string;
+    strNombre: string;
+    strCorreo: string;
 }

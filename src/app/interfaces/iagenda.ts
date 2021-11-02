@@ -1,4 +1,5 @@
 export interface IAgenda {
+    strPassword: string;
     strNombre: string;
-    strNumero: string;
+    strCorreo: string;
 }
