@@ -15,13 +15,12 @@ export class CompViajeComponent implements AfterViewInit,OnInit {
   contra: string;
   anim: Animation;
   //
-  viajes: any;
+
   viaje: any={
-    id: null,
-    inicio:'',
-    destino: '',
-    tarifa: '',
-    userId: null
+    viajeId: null,
+    inicio : '',
+    destino : '',
+    tarifa:''
   };
   ///
   //@ViewChild('square', { static:false }) square: ElementRef;
@@ -30,30 +29,58 @@ export class CompViajeComponent implements AfterViewInit,OnInit {
     public alertController: AlertController,public modalController: ModalController,
     public animationCtrl: AnimationController,private api: APIClientService,
     private toastController: ToastController) {}
+    ngOnInit(){}
 
-    guardarViajes(){
-      this.api.createViajes(this.viaje).subscribe(
-      ()=>{
-        console.log('viaje creado');
-        this.toastExito();
-      },
-      error=>{
-        console.log('error:'+error);
-        this.toastError();
+      ionViewWillEnter(){
+        this.getViajes();
       }
-      );
-    }
 
-  toastError() {
-    throw new Error('Method not implemented.');
-  }
-  toastExito() {
-  }
-    ///guardar
+  //      getViajes(viajeId){
+   //         this.api.getViajes(viajeId).subscribe((dato)=>{
+    //          console.log('Lista viajes');
+    //          console.log(dato);
+    //          this.viaje=dato;
+     //       });
+     //     }
 
-  //guardar(){
-   // this.bdLocal.guardarContactos(this.nombre,this.contra);
- // }
+        getViajes(){
+          if(this.viaje.viajeId==null){
+            if(this.viaje === undefined){
+              console.log('Seleccione un viaje');
+              return;
+            }
+            this.viaje.viajeId=this.viaje.viajeId;
+            this.api.createViaje(this.viaje).subscribe(
+              ()=>{
+                console.log('Creado Correctamente');
+                  this.getViajes();
+              },
+              error=>{
+                console.log('Error '+error);
+              }
+            );
+          }else{
+            this.api.updateViaje(this.viaje.viajeId).subscribe(
+              ()=>{
+                console.log('Actualizado Correctamente');
+                  this.getViajes();
+              },
+              error=>{
+                console.log('Error '+error);
+              }
+            );
+          }
+        }
+
+
+
+
+    //guardar(){
+     // this.bdLocal.guardarContactos(this.Nombre,this.password,this.correo);
+    //}
+   // ionViewWillEnter(){
+     // this.bdLocal.cargarContectos();
+   // }
 ngAfterViewInit(){
   this.anim = this.animationCtrl.create('myanim');
   this.anim
@@ -64,8 +91,7 @@ ngAfterViewInit(){
   .fromTo('trasfrom','traslateX(0px)','traslateX(300px)')
   .fromTo('opacity',1,0.2);
 }
-  ngOnInit() {
-  }
+
   cerrar(){
     //dg
     this.presentAlert();

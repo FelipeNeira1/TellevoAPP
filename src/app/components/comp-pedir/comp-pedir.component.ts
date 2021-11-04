@@ -18,20 +18,23 @@ export class CompPedirComponent implements OnInit {
   };
   constructor(private api: APIClientService,
     private toast: ToastController) { }
-  ionViewVillEnter(){
-    this.getViajes();
-  }
-  getViajes(){
-    this.api.getViajes().subscribe((data)=>{
-      this.viajes= data;
-      this.viajes.reverse();
+    ngOnInit(){}
+
+    ionViewWillEnter(){
+      this.getViajes();
     }
-    );}
-    deleteViajes(id){
-      this.api.deleteViajes(id).subscribe(()=>{
+    getViajes(){
+      this.api.getViajes().subscribe((dato)=>{
+        console.log('Lista viajes');
+        console.log(dato);
+        this.viajes=dato;
+      });
+    }
+    deleteViaje(id){
+      this.api.deleteViaje(id).subscribe(()=>{
         this.getViajes();
       }
       );}
-  ngOnInit() {}
+
 
 }

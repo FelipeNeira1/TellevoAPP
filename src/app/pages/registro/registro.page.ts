@@ -12,6 +12,7 @@ import { BdLocaLService } from '../../services/bd-loca-l.service';
 export class RegistroPage implements AfterViewInit,OnInit {
 
 
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   Nombre: string;
   password: string;
   correo: string;

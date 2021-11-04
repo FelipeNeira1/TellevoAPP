@@ -1,5 +1,17 @@
 <ion-content color="dark" [fullscreen]="true">
     <ion-card>
+        <ion-card-content>
+            <div>
+                <p class="font-monR">Viajes disponibles </p>
+                <ion-item>
+                    <ion-select placeholder="Seleccione viaje" [(ngModel)]="viajes">
+                        <ion-select-option *ngFor="let vi of viajes" [value]="vi">{{vi.viajeId}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </div>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
         <ion-toolbar>
             <ion-list>
                 <ion-item *ngFor="left viaje of viajes">
