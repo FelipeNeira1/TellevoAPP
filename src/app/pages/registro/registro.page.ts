@@ -59,7 +59,7 @@ export class RegistroPage implements AfterViewInit,OnInit {
 
       localStorage.setItem('usuario',JSON.stringify(usuario));
       console.log('hola');
-
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
       this.router.navigate(['/home']);
     }
     ///stor

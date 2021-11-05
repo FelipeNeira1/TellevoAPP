@@ -17,7 +17,7 @@ export class APIClientService {
   };
 
   // Se establece la base url del API a consumir
-    apiURL = 'http://192.168.1.5:3000/';
+    apiURL = ' http://192.168.1.4:3000';
 
     // Se declara la variable http de tipo HttpClient
     constructor(private storage: Storage ,private http: HttpClient,private toastController: ToastController) {

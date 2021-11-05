@@ -6,6 +6,7 @@
                 <ion-item>
                     <ion-datetime placeholder="00:00" picker-format="HH:mm" displayFormat="HH:mm" [(ngModel)]="viaje.hora"></ion-datetime>
                 </ion-item>
+
                 <ion-item>
                     <ion-label position="floating">Costo</ion-label>
                     <ion-input type="numeric" [(ngModel)]="viaje.precio"></ion-input>
@@ -22,7 +23,7 @@
         </ion-card-content>
     </ion-card>
     <div class="ion-text-center">
-        <ion-button class="font-monR ion-text-center" color="secondary" style="margin-bottom: 1em;" (click)="createViaje()">Agendar Viaje</ion-button>
+        <ion-button color="secondary" style="margin-bottom: 1em;" (click)="createViaje()">Agendar Viaje</ion-button>
     </div>
     <ion-toolbar (click)="bounce()" #bouncebtn class="ion-text-center" color="">
         <ion-card color="dark">
