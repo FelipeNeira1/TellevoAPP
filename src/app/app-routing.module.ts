@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {GuardsGuard} from 'src/app/guards/guards.guard';
+import { Guards2Guard } from './guards/guards2.guard';
 const routes: Routes = [
   {
     path: 'home',
+    canActivate:[GuardsGuard],
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
   {
@@ -18,12 +20,12 @@ const routes: Routes = [
   },
   {
     path: 'eleguir',
-    //canActivate:[GuardsGuard],
+    canActivate:[Guards2Guard],
     loadChildren: () => import('./pages/eleguir/eleguir.module').then( m => m.EleguirPageModule)
   },
   {
     path: 'registro',
-    //canActivate:[GuardsGuard],
+    canActivate:[GuardsGuard],
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   },
   {

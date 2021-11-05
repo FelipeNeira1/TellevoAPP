@@ -1,47 +1,36 @@
 <ion-content color="dark" [fullscreen]="true" class="background">
-    <div class="ion-padding-vertical">
-        <ion-card class="ion-text-center">
-            <ion-card-title class="ion-text-center">
-                <ion-label>
-                    <br>
-                    <h1><b>Te llevo APP</b></h1>
-                    <ion-toolbar color>
-                        <img height="150px" width="300px" src="assets/img/duocau.jpg">
-                    </ion-toolbar>
-                    <h5>Un amigo en DuocUC</h5>
-                </ion-label>
-            </ion-card-title>
-        </ion-card>
 
-        <ion-card mode="md">
-            <ion-card-content>
-                <form [formGroup]="HomeForm" (ngSubmit)="ingresar()">
-                    <ion-item [ngClass]="{'mensaje-error' : HomeForm.get('user').errors && (HomeForm.get('user').touched || HomeForm.get('user').dirty)}">
-                        <ion-label position="floating">Usuario</ion-label>
-                        <ion-input formControlName="user" type="text" [(ngModel)]="newUser.newUsuario"></ion-input>
-                    </ion-item>
-                    <span class="help-block" *ngIf="HomeForm.get('user').errors && (HomeForm.get('user').touched || HomeForm.get('user').dirty)">
-                        <small class="mensaje-error" *ngIf="HomeForm.get('user').errors.required">Se requiere ingresar usuario</small>
-                        <small class="mensaje-error" *ngIf="HomeForm.get('user').errors.minlength">El usuario debe tener al menos 3 caracteres</small>
-                    </span>
-                    <ion-item [ngClass]="{'mensaje-error' : HomeForm.get('password').errors && (HomeForm.get('password').touched || HomeForm.get('password').dirty)}">
-                        <ion-label position="floating">Contraseña</ion-label>
-                        <ion-input formControlName="password" type="password" [(ngModel)]="newUser.newPass"></ion-input>
-                    </ion-item>
-                    <ng-container class="help-block" *ngIf="HomeForm.get('password').errors && (HomeForm.get('password').touched || HomeForm.get('password').dirty)">
-                        <small class="mensaje-error" *ngIf="HomeForm.get('password').errors.required">Se requiere ingresar contraseña</small>
-                        <small class="mensaje-error" *ngIf="HomeForm.get('password').errors.minlength">La contraseña debe tener al menos 3 caracteres</small>
-                    </ng-container>
-                    <div>
-                        <ion-button color="secondary" [disabled]="!HomeForm.valid" type="submit" mode="md" expand="block">Ingresar</ion-button>
-                    </div>
-                </form>
-            </ion-card-content>
-        </ion-card>
-        <ion-card class="ion-text-center">
-            <ion-label color="secondary" shape="block" (click)="presentAlert()">¿Olvidaste tu contraseña? Recuperala aquí</ion-label>
-            <br>
-            <ion-label color="secondary" shape="block" (click)="cerrar1()">Crear usuario</ion-label>
-        </ion-card>
-    </div>
+    <ion-card class="ion-text-center">
+        <ion-card-title class="ion-text-center">
+            <ion-label>
+                <br>
+                <h1><b>Te llevo APP</b></h1>
+                <ion-toolbar color>
+                    <img height="150px" width="300px" src="assets/img/duocau.jpg">
+                </ion-toolbar>
+                <h5>Un amigo en DuocUC</h5>
+            </ion-label>
+        </ion-card-title>
+    </ion-card>
+
+    <ion-card>
+        <form [formGroup]="formulariologin">
+            <ion-item>
+                <ion-label position="floating">Usuario</ion-label>
+                <ion-input formControlName="nombre" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Contraseña</ion-label>
+                <ion-input formControlName="passwor" type="password"></ion-input>
+            </ion-item>
+            <div>
+                <ion-button color="secondary" type="submit" (click)="ingresar1()" expand="block">Ingresar</ion-button>
+            </div>
+        </form>
+    </ion-card>
+    <ion-card class="ion-text-center">
+        <ion-label color="secondary" shape="block" (click)="presentAlert()">¿Olvidaste tu contraseña? Recuperala aquí</ion-label>
+        <br>
+        <ion-label color="secondary" shape="block" [routerLink]="['/registro']">Crear usuario</ion-label>
+    </ion-card>
 </ion-content>

@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup,Validators } from '@angular/forms';
+import { FormBuilder, FormGroup,FormControl,Validators } from '@angular/forms';
 import { Router,NavigationExtras } from '@angular/router';
-import { AlertController, AnimationController,Animation, ToastController } from '@ionic/angular';
+import { AlertController, AnimationController,Animation, ToastController, NavController } from '@ionic/angular';
+import { Button } from 'selenium-webdriver';
 import { BdLocaLService } from '../../services/bd-loca-l.service';
 
 @Component({
@@ -15,14 +16,52 @@ export class RegistroPage implements AfterViewInit,OnInit {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   Nombre: string;
   password: string;
-  correo: string;
+//  correo: string;
   anim: Animation;
 
+  formularioRegistro: FormGroup;
+
   constructor(private router: Router,public alertController: AlertController,
-    public toast: ToastController,public animationCtrl: AnimationController,private bdLocal: BdLocaLService) {}
+    public toast: ToastController,public animationCtrl: AnimationController,
+    private bdLocal: BdLocaLService,private fb: FormBuilder,public navCtrl: NavController ) {
+
+
+      this.formularioRegistro =this.fb.group({
+        // eslint-disable-next-line quote-props
+        'nombre': new FormControl('',[Validators.required, Validators.minLength(3)]),
+        // eslint-disable-next-line quote-props
+        'passwor': new FormControl('',[Validators.required, Validators.minLength(3)]),
+        // eslint-disable-next-line quote-props
+        'confirmacionPassword': new FormControl('', [Validators.required, Validators.minLength(3)])
+      });
+    }
+
+    async guardar1(){
+      // eslint-disable-next-line no-var
+      var f =  this.formularioRegistro.value;
+
+      if(this.formularioRegistro.invalid){
+
+        const alert = await this.alertController.create({
+          header:'datos incompletos',
+          message: 'tienes que llenar todos los  campos ',
+          buttons: [ 'aceptar'  ]
+
+        });
+
+        await alert.present();
+        return;
+      }
+        const usuario = {
+          nombre: f.nombre,
+          passwor: f.passwor
+        };
+
+      localStorage.setItem('usuario',JSON.stringify(usuario));
+    }
     ///stor
     guardar(){
-      this.bdLocal.guardarContactos(this.Nombre,this.password,this.correo);
+      this.bdLocal.guardarContactos(this.Nombre,this.password);
     }
 ionViewWillEnter(){
   this.bdLocal.cargarContectos();

@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup,Validators } from '@angular/forms';
+import { FormBuilder, FormGroup,FormControl,Validators } from '@angular/forms';
 import { Router,NavigationExtras, ActivatedRoute } from '@angular/router';
-import { AlertController, AnimationController,Animation, ToastController } from '@ionic/angular';
+import { AlertController, AnimationController,Animation, ToastController, NavController } from '@ionic/angular';
 import { BdLocaLService } from '../../services/bd-loca-l.service';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -11,75 +13,80 @@ import { BdLocaLService } from '../../services/bd-loca-l.service';
 })
 export class HomePage implements OnInit,AfterViewInit {
 //
-HomeForm: FormGroup;
-newUser={
-newUsuario:'',
-};
 
-Nombre: string;
-password: string;
-correo: string;;
+
+//Nombre: string;
+//password: string;
 anim: Animation;
-auth: any;
-usus: any;
-
-
-
-  get user() {
-    return this.HomeForm.get('user');
-  }
-
-  get password2() {
-    return this.HomeForm.get('password');
-  }
-
   //----
-  constructor(private form: FormBuilder ,private router: Router
+  formulariologin: FormGroup;
+  constructor(private fb: FormBuilder ,private router: Router
     ,public alertController: AlertController,
     public toastController: ToastController,public animationCtrl: AnimationController
-    ,private bdLocal: BdLocaLService,private activeroute: ActivatedRoute) {
-      this.router.navigate(['eleguir/uno']);
-      this.activeroute.queryParams.subscribe(params => {
-        if (this.router.getCurrentNavigation().extras.state) {
-          this.Nombre = this.router.getCurrentNavigation().extras.state.newUser;
-          console.log(this.Nombre);
-        } else {this.router.navigate(['/home']);}
+    ,private bdLocal: BdLocaLService,private activeroute: ActivatedRoute,public navCtrl: NavController) {
+
+
+      this.formulariologin =this.fb.group({
+        // eslint-disable-next-line quote-props
+        'nombre': new FormControl('',[Validators.required, Validators.minLength(3)]),
+        // eslint-disable-next-line quote-props
+        'passwor': new FormControl('',[Validators.required, Validators.minLength(3)])
       });
+
+}
+  async ingresar1(){
+
+    // eslint-disable-next-line no-var
+    var f =  this.formulariologin.value;
+
+    // eslint-disable-next-line no-var
+    var usuario = JSON.parse(localStorage.getItem('usuario'));
+
+      if(usuario.nombre === f.nombre && usuario.password === f.password){
+        console.log('ingresado');
+        localStorage.setItem('ingresado','true');
+        this.navCtrl.navigateRoot('/eleguir');
+      }else{
+        const alert = await this.alertController.create({
+          header:'datos incorrectos',
+          message: 'Los datos que ingresaste son incorectos ',
+          buttons: [ 'aceptar' ]
+        });
+
+        await alert.present();
+      }
     }
+
+
+    cerrar1(){
+      this.router.navigate(['/registro']);
+    }
+
     guardar(){
-      this.bdLocal.guardarContactos(this.Nombre,this.password,this.correo);
+   //   this.bdLocal.guardarContactos(this.Nombre,this.password);
     }
 ionViewWillEnter(){
-  this.bdLocal.cargarContectos();
+  //this.bdLocal.cargarContectos();
 }
 
 ngAfterViewInit(){
-  this.anim = this.animationCtrl.create('myanim');
-  this.anim
-  .duration(1500)
-  .easing('ease-out')
-  .iterations(Infinity)
-  .fromTo('trasfrom','traslateX(0px)','traslateX(300px)')
-  .fromTo('opacity',1,0.2);
+ // this.anim = this.animationCtrl.create('myanim');
+ // this.anim
+ // .duration(1500)
+ // .easing('ease-out')
+ // .iterations(Infinity)
+ // .fromTo('trasfrom','traslateX(0px)','traslateX(300px)')
+ // .fromTo('opacity',1,0.2);
 }
 //validacion
-  ngOnInit(){
-    this.HomeForm = this.form.group({
-      user: ['',[Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(3)]]
-    });
-  }
-  public ingresar() {
-    console.log(this.HomeForm.value);
+  ngOnInit(){}
 
-    const navigationExtras: NavigationExtras = {
-      state: {
-        newUser: this.newUser
-      }
-    };
-    this.router.navigate(['/eleguir'], navigationExtras);
-  }
 
+
+
+
+
+ //contraseña
   validarUsuario(user: string) {
     if(user.length >=4){
       return {
@@ -93,7 +100,7 @@ ngAfterViewInit(){
         };
     }
   }
-  //contraseña
+
   async mostrarToast() {
     await this.toastController.create({
       message: 'Un correo se te fue enviado para recuperar la contraseña o cambiarla ',
@@ -145,8 +152,5 @@ ngAfterViewInit(){
     await alert.present();
   }
 
-  cerrar1(){
-    this.router.navigate(['/registro']);
-  }
 
 }

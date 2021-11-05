@@ -11,5 +11,14 @@
     </ion-card>
     <div class="ion-text-center">
         <ion-button color="secondary" type="submit" mode="md" expand="block" (click)="cerrar()">Cerrar sesión</ion-button>
+
     </div>
+    <ion-button color="secondary" (click)="salir()" routerDirection="root" lines="none" detail="false" slot="start" [name]="'exit-outline'">Cerrar sesión</ion-button>
+
+    <ion-item (click)="salir()" routerDirection="root" lines="none" detail="false">
+        <ion-icon slot="start" [name]="'exit-outline'"></ion-icon>
+        <ion-label>salir</ion-label>
+    </ion-item>
+    <ion-button color="secondary" (click)="salir()" routerDirection="root" lines="none" detail="false" slot="start" [name]="'exit-outline'">Cerrar sesión</ion-button>
+
 </ion-header>

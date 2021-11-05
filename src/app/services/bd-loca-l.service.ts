@@ -30,10 +30,10 @@ export class BdLocaLService {
       this.agenda=miAgenda;
     }
   }
-  guardarContactos(Nombre: string,password: string,correo: string){
+  guardarContactos(Nombre: string,password: string){
     const existe= this.agenda.find(c=>c.strNombre===Nombre);
     if (!existe){
-      this.agenda.unshift({strNombre:Nombre, strPassword:password, strCorreo:correo});
+      this.agenda.unshift({strNombre:Nombre,strPassword:password});
       this._storage.set('agenda',this.agenda);
       this.presentToast('Su Usuario se ha registrado correctamente');
 

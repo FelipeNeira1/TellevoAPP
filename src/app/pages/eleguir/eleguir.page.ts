@@ -12,14 +12,6 @@ export class EleguirPage implements AfterViewInit {
   data: any;
 
   constructor(private activeroute: ActivatedRoute, private router: Router, public alertController: AlertController) {
-    this.router.navigate(['eleguir/uno']);
-
-    this.activeroute.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.data = this.router.getCurrentNavigation().extras.state.newUser;
-        console.log(this.data);
-      } else {this.router.navigate(['/eleguir']);}
-    });
   }
 
 segmentChanged($event){
