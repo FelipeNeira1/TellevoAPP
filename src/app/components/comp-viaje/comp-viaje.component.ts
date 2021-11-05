@@ -53,7 +53,7 @@ export class CompViajeComponent implements OnInit {
         }
         if (this.viaje.hora!="" && this.viaje.precio!="" && this.viaje.origen!="" && this.viaje.destino!="") {
           this.viaje.viajeId = this.cant + 1;
-          this.viaje.id = this.cant + 1
+          this.viaje.id = this.cant + 1;
           this.api.createViaje(this.viaje).subscribe(
             ()=>{
               this.presentAlert('Viaje agendado');
@@ -64,7 +64,7 @@ export class CompViajeComponent implements OnInit {
             }
           );
         }else{
-          this.presentAlert('Faltan campos por llenar');
+          this.presentAlert('algo salio mal ');
         }
       }
 

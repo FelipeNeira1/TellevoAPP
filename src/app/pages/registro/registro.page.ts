@@ -23,7 +23,7 @@ export class RegistroPage implements AfterViewInit,OnInit {
 
   constructor(private router: Router,public alertController: AlertController,
     public toast: ToastController,public animationCtrl: AnimationController,
-    private bdLocal: BdLocaLService,private fb: FormBuilder,public navCtrl: NavController ) {
+    private bdLocal: BdLocaLService,private fb: FormBuilder,public navCtrl: NavController, ) {
 
 
       this.formularioRegistro =this.fb.group({
@@ -58,6 +58,9 @@ export class RegistroPage implements AfterViewInit,OnInit {
         };
 
       localStorage.setItem('usuario',JSON.stringify(usuario));
+      console.log('hola');
+
+      this.router.navigate(['/home']);
     }
     ///stor
     guardar(){
@@ -80,5 +83,15 @@ ngAfterViewInit(){
   }
   cerrar(){
     this.router.navigate(['/home']);
+  }
+  async presentToast(mensaje: string){
+    const toast = await this.toast.create({
+      message: mensaje,
+      translucent:true,
+      color:'medium',
+      position: 'top',
+      duration: 4000
+    });
+    toast.present();
   }
 }
