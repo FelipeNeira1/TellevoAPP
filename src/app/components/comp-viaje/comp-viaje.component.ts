@@ -10,18 +10,17 @@ import { BdLocaLService } from '../../services/bd-loca-l.service';
   templateUrl: './comp-viaje.component.html',
   styleUrls: ['./comp-viaje.component.scss'],
 })
-export class CompViajeComponent implements AfterViewInit,OnInit {
-  nombre: string;
-  contra: string;
-  anim: Animation;
-  //
-
-  viaje: any={
+export class CompViajeComponent implements OnInit {
+  viaje = {
+    id:null,
     viajeId: null,
-    inicio : '',
-    destino : '',
-    tarifa:''
+    hora : '',
+    precio : '',
+    origen: '',
+    destino: ''
   };
+  viajes: any;
+  cant: any;
   ///
   //@ViewChild('square', { static:false }) square: ElementRef;
   //isPlaying = false;
@@ -29,119 +28,70 @@ export class CompViajeComponent implements AfterViewInit,OnInit {
     public alertController: AlertController,public modalController: ModalController,
     public animationCtrl: AnimationController,private api: APIClientService,
     private toastController: ToastController) {}
-    ngOnInit(){}
+    ngOnInit() {}
 
-      ionViewWillEnter(){
-        this.getViajes();
+    ionViewWillEnter(){
+      this.getViajes();
+    };
+
+    getViajes(){
+      this.api.getViajes().subscribe(
+        (dato)=>{
+        this.viajes= dato;
+        this.cant = this.viajes.length;
+
+        console.log(this.viajes.id);
+      }, (error)=>{
+        console.log(error);
+      });
+    }
+
+    createViaje(){
+        if(this.viaje.hora===undefined){
+          this.presentAlert('Seleccione una hora');
+          return;
+        }
+        if (this.viaje.hora!="" && this.viaje.precio!="" && this.viaje.origen!="" && this.viaje.destino!="") {
+          this.viaje.viajeId = this.cant + 1;
+          this.viaje.id = this.cant + 1
+          this.api.createViaje(this.viaje).subscribe(
+            ()=>{
+              this.presentAlert('Viaje agendado');
+              // this.getViajes();
+            },
+            error=>{
+              console.log('Error '+error);
+            }
+          );
+        }else{
+          this.presentAlert('Faltan campos por llenar');
+        }
       }
 
-  //      getViajes(viajeId){
-   //         this.api.getViajes(viajeId).subscribe((dato)=>{
-    //          console.log('Lista viajes');
-    //          console.log(dato);
-    //          this.viaje=dato;
-     //       });
-     //     }
+      limpiar(){
+        for(var[key,value] of Object.entries(this.viaje)){
+          Object.defineProperty(this.viaje, key,{value:''});
+        }
+      }
 
-        getViajes(){
-          if(this.viaje.viajeId==null){
-            if(this.viaje === undefined){
-              console.log('Seleccione un viaje');
-              return;
-            }
-            this.viaje.viajeId=this.viaje.viajeId;
-            this.api.createViaje(this.viaje).subscribe(
-              ()=>{
-                console.log('Creado Correctamente');
-                  this.getViajes();
-              },
-              error=>{
-                console.log('Error '+error);
-              }
-            );
+        mostrar(){
+          if (this.viaje.viajeId!=0 && this.viaje.hora!='') {
+            this.presentAlert('Viaje agendado');
           }else{
-            this.api.updateViaje(this.viaje.viajeId).subscribe(
-              ()=>{
-                console.log('Actualizado Correctamente');
-                  this.getViajes();
-              },
-              error=>{
-                console.log('Error '+error);
-              }
-            );
-          }
+            this.presentAlert('Viaje no guardado');
+        }
         }
 
+      async presentAlert(titulo: string){
+        const alert = await this.alertController.create({
+          cssClass: 'my-custom-class',
+          header: titulo,
+          buttons: ['OK']
+        });
+        await alert.present();
+      }
 
 
-
-    //guardar(){
-     // this.bdLocal.guardarContactos(this.Nombre,this.password,this.correo);
-    //}
-   // ionViewWillEnter(){
-     // this.bdLocal.cargarContectos();
-   // }
-ngAfterViewInit(){
-  this.anim = this.animationCtrl.create('myanim');
-  this.anim
-  //.addElement(this.square.nativeElement)
-  .duration(1500)
-  .easing('ease-out')
-  .iterations(Infinity)
-  .fromTo('trasfrom','traslateX(0px)','traslateX(300px)')
-  .fromTo('opacity',1,0.2);
-}
-
-  cerrar(){
-    //dg
-    this.presentAlert();
-    this.router.navigate(['/home']);
-  }
-  alerta(){
-    this.presentAlert2();
-  }
-  alerta2(){
-    this.presentAlert3();
-  }
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Cerrar sesion',
-      message: 'Se acaba de cerrar la sesion con exito',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-
-    const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
-  }
-  async presentAlert2() {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Pedir trasporte',
-      message: '¿Esta segur@?',
-      buttons: ['OK','CANCELAR']
-    });
-
-    await alert.present();
-
-    const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
-  }
-  async presentAlert3() {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'realizar trasporte',
-      message: '¿Esta segur@?',
-      buttons: ['OK','CANCELAR']
-    });
-
-    await alert.present();
-
-    const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
-  }
   //animacion
   @ViewChild('bouncebtn', { read: ElementRef })bouncebtn: ElementRef;
 bounce() {
