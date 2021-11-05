@@ -24,28 +24,30 @@ export class APIClientService {
     }
     // eslint-disable-next-line @typescript-eslint/naming-convention
 
-    getViajes(): Observable<any>{
-      return this.http.get(this.apiURL+'/viaje').pipe(
-        retry(3)
-      );
-    }
-    //Obtener vieje
-    getViaje(viajeId): Observable<any>{
-      return this.http.get(this.apiURL+'/viaje/'+viajeId).pipe(
-        retry(3));
-    }
-    //crear un usuario
-    createViaje(viajeId): Observable<any>{
-      return this.http.post(this.apiURL+'/viaje/',viajeId,this.httpOptions) .pipe(
-        retry(3));
-      }
-    //modificar un viaje
-    updateViaje(viajeId): Observable<any>{
-      return this.http.put(this.apiURL+'/viaje/'+viajeId,this.httpOptions).pipe(
-        retry(3));
-      }
-    //borrar un viaje
-    deleteViaje(viajeId): Observable<any>{
-      return this.http.delete(this.apiURL+'/viaje/'+viajeId,this.httpOptions);
-    }
+
+    //Obtener viajes
+  getViajes(): Observable<any>{
+    return this.http.get(this.apiURL+'/viajes').pipe(
+      retry(3)
+    );
   }
+  //Obtener viaje
+  getViaje(viajeId): Observable<any>{
+    return this.http.get(this.apiURL+'/viajes/'+viajeId).pipe(
+      retry(3));
+  }
+  //crear un viaje
+  createViaje(viajeId): Observable<any>{
+    return this.http.post(this.apiURL+'/viajes/',viajeId,this.httpOptions).pipe(
+      retry(3));
+    }
+  //modificar un viaje
+  updateViaje(viajeId): Observable<any>{
+    return this.http.put(this.apiURL+'/viajes/'+viajeId,this.httpOptions).pipe(
+      retry(3));
+    }
+  //borrar un viaje
+  deleteViaje(viajeId): Observable<any>{
+    return this.http.delete(this.apiURL+'/viajes/'+viajeId,this.httpOptions);
+  }
+}

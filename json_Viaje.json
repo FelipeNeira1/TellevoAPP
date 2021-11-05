@@ -1,8 +1,10 @@
 ﻿{
     "viaje": [{
-        "viajeId": "1",
-        "inicio ": "aqui",
-        "destino ": "un lado",
-        "tarifa": "1000"
+        "id": 1,
+        "viajeId": 1,
+        "hora": "2021-11-05T03:57:40.472-03:00",
+        "precio": "1000",
+        "origen": "aaa",
+        "destino": "dddd"
     }]
 }

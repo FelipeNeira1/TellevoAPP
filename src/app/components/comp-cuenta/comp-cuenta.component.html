@@ -6,19 +6,15 @@
             </div>
             <img src="assets/img/1.png" alt="">
             <h1>(usuario)</h1>
-            <!-- <h1>(usuario){{data.newUsuario}}</h1> -->
+            <h1>{{nombre}}</h1>
         </ion-card-header>
     </ion-card>
-    <div class="ion-text-center">
-        <ion-button color="secondary" type="submit" mode="md" expand="block" (click)="cerrar()">Cerrar sesión</ion-button>
+    <ion-card>
+        <ion-item color="secondary" type="submit" mode="md" expand="block" (click)="salir()" routerDirection="root" lines="none" detail="false">
+            <ion-icon slot="start" [name]="'exit-outline'"></ion-icon>
+            <ion-label>Cerrar sesion</ion-label>
+        </ion-item>
+    </ion-card>
 
-    </div>
-    <ion-button color="secondary" (click)="salir()" routerDirection="root" lines="none" detail="false" slot="start" [name]="'exit-outline'">Cerrar sesión</ion-button>
-
-    <ion-item (click)="salir()" routerDirection="root" lines="none" detail="false">
-        <ion-icon slot="start" [name]="'exit-outline'"></ion-icon>
-        <ion-label>salir</ion-label>
-    </ion-item>
-    <ion-button color="secondary" (click)="salir()" routerDirection="root" lines="none" detail="false" slot="start" [name]="'exit-outline'">Cerrar sesión</ion-button>
 
 </ion-header>

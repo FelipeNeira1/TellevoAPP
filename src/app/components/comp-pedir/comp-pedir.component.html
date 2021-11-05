@@ -2,28 +2,19 @@
     <ion-card>
         <ion-card-content>
             <div>
-                <p class="font-monR">Viajes disponibles </p>
+                <p>Viajes disponibles </p>
                 <ion-item>
                     <ion-select placeholder="Seleccione viaje" [(ngModel)]="viajes">
-                        <ion-select-option *ngFor="let vi of viajes" [value]="vi">{{vi.viajeId}}</ion-select-option>
+                        <ion-select-option *ngFor="let vi of viajes" [value]="vi.viajeId">{{vi.hora}}hrs</ion-select-option>
                     </ion-select>
                 </ion-item>
             </div>
+            <div style="padding-top: 2em;">
+                <p>Costo de viaje: </p>
+                <p>$</p>
+            </div>
         </ion-card-content>
     </ion-card>
-    <ion-card>
-        <ion-toolbar>
-            <ion-list>
-                <ion-item *ngFor="left viaje of viajes">
-                    <ion-label position="floating">
-                        <h2>{{viaje.inicio}}</h2>
-                        <h2>{{viaje.destino}}</h2>
-                        <p> {{viaje.tarifa}}</p>
-                    </ion-label>
-                    <ion-buttom (click)="deleteViajes(viaje.id)">Eliminar</ion-buttom>
-                </ion-item>
-            </ion-list>
-        </ion-toolbar>
-    </ion-card>
+
     <br>
 </ion-content>
