@@ -9,12 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import {HttpClientModule} from '@angular/common/http';
+import {GoogleMapsModule} from '@angular/google-maps';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot({
-  }), AppRoutingModule,IonicStorageModule.forRoot(),HttpClientModule, BrowserAnimationsModule],
+  }), AppRoutingModule,IonicStorageModule.forRoot(),HttpClientModule, BrowserAnimationsModule,GoogleMapsModule],
+
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
