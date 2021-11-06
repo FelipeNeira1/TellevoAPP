@@ -9,7 +9,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import {HttpClientModule} from '@angular/common/http';
+
 import {GoogleMapsModule} from '@angular/google-maps';
+
+
+//import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],

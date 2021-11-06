@@ -4,7 +4,7 @@ import { AlertController, AnimationController, Animation, ModalController, Toast
 import * as Bounce from 'bounce.js';
 import { APIClientService } from 'src/app/services/apiclient.service';
 import { BdLocaLService } from '../../services/bd-loca-l.service';
-
+//import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 @Component({
   selector: 'app-comp-viaje',
   templateUrl: './comp-viaje.component.html',
@@ -29,7 +29,12 @@ export class CompViajeComponent implements OnInit {
     public animationCtrl: AnimationController,private api: APIClientService,
     private toastController: ToastController) {}
     ngOnInit() {}
+    //geolocationNative(){
 
+    //this.geolocation.getCurrentPosition().then((geoposition: Geoposition)=>{
+    //console.log(geoposition);
+     // });
+    //}
     ionViewWillEnter(){
       this.getViajes();
     };
