@@ -51,31 +51,36 @@ export class CompViajeComponent implements OnInit {
       });
     }
 
-    createViaje(){
-        if(this.viaje.hora===undefined){
-          this.presentAlert('Seleccione una hora');
-          return;
-        }
-        if (this.viaje.hora!="" && this.viaje.precio!="" && this.viaje.origen!="" && this.viaje.destino!="") {
-          this.viaje.viajeId = this.cant + 1;
-          this.viaje.id = this.cant + 1;
-          this.api.createViaje(this.viaje).subscribe(
-            ()=>{
-              this.presentAlert('Viaje agendado');
-              // this.getViajes();
-            },
-            error=>{
-              console.log('Error '+error);
-            }
-          );
-        }else{
-          this.presentAlert('algo salio mal ');
-        }
+    createViaje() {
+      if (this.viaje.hora === undefined) {
+        this.presentAlert('Seleccione una hora');
+        return;
       }
+      if (
+        this.viaje.hora !== '' &&
+        this.viaje.precio !== '' &&
+        this.viaje.origen !== '' &&
+        this.viaje.destino !== ''
+      ) {
+        this.viaje.viajeId = this.cant + 1;
+        this.viaje.id = this.cant + 1;
+        this.api.createViaje(this.viaje).subscribe(
+          () => {
+            this.presentAlert('Viaje agendado');
+            // this.getViajes();
+          },
+          (error) => {
+            console.log('Error ' + error);
+          }
+        );
+      } else {
+        this.presentAlert('Faltan campos por llenar');
+      }
+    }
 
       limpiar(){
-        for(var[key,value] of Object.entries(this.viaje)){
-          Object.defineProperty(this.viaje, key,{value:''});
+        for (let [key, value] of Object.entries(this.viaje)) {
+          Object.defineProperty(this.viaje, key, { value: '' });
         }
       }
 
@@ -125,4 +130,43 @@ bounce() {
   })
     .applyTo(this.bouncebtn.nativeElement);
 }
+//loadMap() {
+
+  //  const mapEle: HTMLElement = document.getElementById('map');
+
+   // const myLatLng = { lat: -33.04487773980582, lng: -71.43802134098559 };
+
+   // this.map = new google.maps.Map(mapEle, {
+    //  center: myLatLng,
+     // zoom: 12,
+     // zoomControl: true,
+     // mapTypeControl: false,
+     //// scaleControl: false,
+     // streetViewControl: false,
+     // rotateControl: false,
+     // fullscreenControl: true,
+  // });
+
+   // google.maps.event.addListenerOnce(this.map, 'idle', () => {
+   //   // this.renderMarkers();
+    //  mapEle.classList.add('show-map');
+    //  const marker = {
+     //   position: {
+     //    lat: -33.04487773980582,
+      //    lng: -71.43802134098559,
+      //  },
+      //  title: 'Lugar uno',
+    // };
+     // this.addMarker(marker);
+   // });
+ // }
+
+ // addMarker(marker: Marker) {
+  //  return new google.maps.Marker({
+   //   position: marker.position,
+   //   map: this.map,
+   //   title: marker.title,
+   // });
+
+//}
 }
