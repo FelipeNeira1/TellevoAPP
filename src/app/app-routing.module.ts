@@ -36,6 +36,10 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
   },
+  {
+    path: 'maps',
+    loadChildren: () => import('./pages/maps/maps.module').then( m => m.MapsPageModule)
+  },
 
 ];
 

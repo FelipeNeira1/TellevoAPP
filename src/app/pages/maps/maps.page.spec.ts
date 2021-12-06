@@ -1,21 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { UrlSerializer } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
-import { NotfoundPage } from './notfound.page';
+import { MapsPage } from './maps.page';
 
-describe('NotfoundPage', () => {
-  let component: NotfoundPage;
-  let fixture: ComponentFixture<NotfoundPage>;
+describe('MapsPage', () => {
+  let component: MapsPage;
+  let fixture: ComponentFixture<MapsPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NotfoundPage ],
-      imports: [IonicModule.forRoot()],
-      providers: [UrlSerializer],
+      declarations: [ MapsPage ],
+      imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NotfoundPage);
+    fixture = TestBed.createComponent(MapsPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
